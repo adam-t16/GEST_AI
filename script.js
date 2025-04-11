@@ -11,7 +11,136 @@ themeToggle.addEventListener('click', () => {
 if (localStorage.getItem('theme') === 'dark') {
     body.classList.add('dark');
 }
+// Service details content
+const serviceDetails = {
+    finance: {
+        title: "IA Finances - Détails du Service",
+        content: `
+            <div class="service-details">
+                <h3>Transformez votre gestion financière</h3>
+                <p>Notre solution IA Finances révolutionne la gestion financière de votre entreprise avec des fonctionnalités avancées :</p>
+                <ul>
+                    <li>Analyse prédictive des flux de trésorerie</li>
+                    <li>Détection automatique des anomalies financières</li>
+                    <li>Tableaux de bord personnalisables en temps réel</li>
+                    <li>Recommandations d'optimisation budgétaire</li>
+                    <li>Intégration avec vos outils comptables existants</li>
+                    <li>Rapports automatisés et personnalisables</li>
+                </ul>
+                <p>Prix: 299 DH/mois</p>
+            </div>
+        `
+    },
+    hr: {
+        title: "IA RH - Détails du Service",
+        content: `
+            <div class="service-details">
+                <h3>Optimisez votre gestion RH</h3>
+                <p>Notre solution IA RH simplifie et améliore tous vos processus RH :</p>
+                <ul>
+                    <li>Analyse prédictive des besoins en recrutement</li>
+                    <li>Évaluation automatisée des candidatures</li>
+                    <li>Suivi personnalisé du développement des employés</li>
+                    <li>Analyse du climat social en temps réel</li>
+                    <li>Gestion intelligente des congés et absences</li>
+                    <li>Recommandations de formation personnalisées</li>
+                </ul>
+                <p>Prix: 249 DH/mois</p>
+            </div>
+        `
+    },
+    flow: {
+        title: "IA Business Flow - Détails du Service",
+        content: `
+            <div class="service-details">
+                <h3>Automatisez vos processus métier</h3>
+                <p>Optimisez l'ensemble de vos opérations avec IA Business Flow :</p>
+                <ul>
+                    <li>Automatisation intelligente des tâches répétitives</li>
+                    <li>Optimisation des processus basée sur l'IA</li>
+                    <li>Analyse prédictive des goulots d'étranglement</li>
+                    <li>Tableaux de bord de performance en temps réel</li>
+                    <li>Intégration avec vos outils existants</li>
+                    <li>Recommandations d'amélioration continue</li>
+                </ul>
+                <p>Prix: 399 DH/mois</p>
+            </div>
+        `
+    },
+    enterprise: {
+        title: "Pack Entreprise - Détails du Service",
+        content: `
+            <div class="service-details">
+                <h3>Solution complète pour votre entreprise</h3>
+                <p>Notre pack entreprise offre une solution complète et intégrée :</p>
+                <ul>
+                    <li>Accès à toutes nos solutions IA</li>
+                    <li>Support dédié 24/7</li>
+                    <li>Personnalisation avancée selon vos besoins</li>
+                    <li>Formation complète de vos équipes</li>
+                    <li>Tableau de bord unifié pour toutes les solutions</li>
+                    <li>Rapports et analyses sur mesure</li>
+                </ul>
+                <p>Prix: 799 DH/mois</p>
+            </div>
+        `
+    }
+};
 
+// Modal functionality
+function showModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.classList.add('show');
+}
+
+function hideModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.classList.remove('show');
+}
+
+// Service details modal
+document.querySelectorAll('.service-cta').forEach(button => {
+    button.addEventListener('click', () => {
+        const service = button.getAttribute('data-service');
+        const details = serviceDetails[service];
+        
+        document.getElementById('modalTitle').textContent = details.title;
+        document.getElementById('modalContent').innerHTML = details.content;
+        showModal('serviceDetailsModal');
+    });
+});
+
+// Demo form modal
+document.getElementById('demoButton').addEventListener('click', () => {
+    showModal('demoFormModal');
+});
+
+// Close buttons
+document.querySelectorAll('.close-modal').forEach(closeBtn => {
+    closeBtn.addEventListener('click', () => {
+        const modal = closeBtn.closest('.modal');
+        hideModal(modal.id);
+    });
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', (event) => {
+    if (event.target.classList.contains('modal')) {
+        hideModal(event.target.id);
+    }
+});
+
+// Demo form submission
+document.getElementById('demoForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Here you would typically send the form data to a server
+    alert('Votre demande de démo a été envoyée avec succès! Nous vous contacterons bientôt.');
+    
+    // Reset form and close modal
+    e.target.reset();
+    hideModal('demoFormModal');
+});
 // Mobile Menu Toggle
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
