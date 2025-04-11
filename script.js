@@ -25,9 +25,8 @@ const serviceDetails = {
                     <li>Tableaux de bord personnalisables en temps réel</li>
                     <li>Recommandations d'optimisation budgétaire</li>
                     <li>Intégration avec vos outils comptables existants</li>
-                    <li>Rapports automatisés et personnalisables</li>
                 </ul>
-                <p>Prix: 299 DH/mois</p>
+                <p class="price">299 DH/mois</p>
             </div>
         `
     },
@@ -43,9 +42,8 @@ const serviceDetails = {
                     <li>Suivi personnalisé du développement des employés</li>
                     <li>Analyse du climat social en temps réel</li>
                     <li>Gestion intelligente des congés et absences</li>
-                    <li>Recommandations de formation personnalisées</li>
                 </ul>
-                <p>Prix: 249 DH/mois</p>
+                <p class="price">249 DH/mois</p>
             </div>
         `
     },
@@ -61,9 +59,8 @@ const serviceDetails = {
                     <li>Analyse prédictive des goulots d'étranglement</li>
                     <li>Tableaux de bord de performance en temps réel</li>
                     <li>Intégration avec vos outils existants</li>
-                    <li>Recommandations d'amélioration continue</li>
                 </ul>
-                <p>Prix: 399 DH/mois</p>
+                <p class="price">399 DH/mois</p>
             </div>
         `
     },
@@ -79,9 +76,8 @@ const serviceDetails = {
                     <li>Personnalisation avancée selon vos besoins</li>
                     <li>Formation complète de vos équipes</li>
                     <li>Tableau de bord unifié pour toutes les solutions</li>
-                    <li>Rapports et analyses sur mesure</li>
                 </ul>
-                <p>Prix: 799 DH/mois</p>
+                <p class="price">799 DH/mois</p>
             </div>
         `
     }
@@ -110,11 +106,6 @@ document.querySelectorAll('.service-cta').forEach(button => {
     });
 });
 
-// Demo form modal
-document.getElementById('demoButton').addEventListener('click', () => {
-    showModal('demoFormModal');
-});
-
 // Close buttons
 document.querySelectorAll('.close-modal').forEach(closeBtn => {
     closeBtn.addEventListener('click', () => {
@@ -130,16 +121,33 @@ window.addEventListener('click', (event) => {
     }
 });
 
+// Contact form submission
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Votre message a été envoyé avec succès! Nous vous contacterons bientôt.');
+    e.target.reset();
+});
+
 // Demo form submission
 document.getElementById('demoForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    // Here you would typically send the form data to a server
     alert('Votre demande de démo a été envoyée avec succès! Nous vous contacterons bientôt.');
-    
-    // Reset form and close modal
     e.target.reset();
     hideModal('demoFormModal');
+});
+
+// Smooth scroll for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
 });
 // Mobile Menu Toggle
 const menuToggle = document.querySelector('.menu-toggle');
